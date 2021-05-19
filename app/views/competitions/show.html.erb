@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      Competition #<%= @the_competition.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/competitions">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_competition/<%= @the_competition.id %>">
+          Delete competition
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Name
+      </dt>
+      <dd>
+        <%= @the_competition.name %>
+      </dd>
+
+      <dt>
+        Submissions
+      </dt>
+      <dd>
+        <%= @the_competition.submissions %>
+      </dd>
+
+      <dt>
+        League
+      </dt>
+      <dd>
+        <%= @the_competition.league_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_competition.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_competition.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit competition
+    </h2>
+
+    <form action="/modify_competition/<%= @the_competition.id %>"  method="post" >
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name" value="<%= @the_competition.name %>">
+      </div>
+
+      <div>
+        <label for="submissions_box">
+          Submissions
+        </label>
+
+        <input type="text" id="submissions_box" name="query_submissions" value="<%= @the_competition.submissions %>">
+      </div>
+
+      <div>
+        <label for="league_id_box">
+          League
+        </label>
+
+        <input type="text" id="league_id_box" name="query_league_id" value="<%= @the_competition.league_id %>">
+      </div>
+
+      <button>
+        Update competition
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

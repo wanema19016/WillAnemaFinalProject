@@ -1,0 +1,147 @@
+<div>
+  <div>
+    <h1>
+      List of all leagues
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new league
+    </h2>
+
+    <form action="/insert_league" method="post">
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name">
+      </div>
+
+      <div>
+        <label for="image_box">
+          Image
+        </label>
+
+        <input type="text" id="image_box" name="query_image">
+      </div>
+
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <input type="text" id="description_box" name="query_description">
+      </div>
+
+      <div>
+        <label for="game_box">
+          Game
+        </label>
+
+        <input type="text" id="game_box" name="query_game">
+      </div>
+
+      <div>
+        <input type="hidden" value=<%= session.fetch(:user_id) %>>
+      </div>
+
+      <button>
+        Create league
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Name
+        </th>
+
+        <th>
+          Image
+        </th>
+
+        <th>
+          Description
+        </th>
+
+        <th>
+          Game
+        </th>
+
+        <th>
+          Owner
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_leagues.each do |a_league| %>
+      <tr>
+        <td>
+          <%= a_league.id %>
+        </td>
+
+        <td>
+          <%= a_league.name %>
+        </td>
+
+        <td>
+          <img src="<%= a_league.image %>">
+        </td>
+
+        <td>
+          <%= a_league.description %>
+        </td>
+
+        <td>
+          <%= a_league.game %>
+        </td>
+
+        <td>
+          <% owner_name = User.where({:id => a_league.owner_id}).first %>
+          <%= owner_name.first_name %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_league.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_league.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/leagues/<%= a_league.id %>">
+            Go to
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
